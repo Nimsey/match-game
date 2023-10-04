@@ -40,6 +40,14 @@ function startTimer() {
             gameOverText.classList.add("game-over");
             gameOverText.textContent = "Game Over!";
             timeDisplay.after(gameOverText);
+            // insert the form which the player can enter name
+            const playerNameLabel = document.createElement('label');
+            playerNameLabel.textContent = 'Enter your name: ';
+            playerNameInput.style.display = 'inline';
+            submitScoreButton.style.display = 'inline';
+            gameBoard.appendChild(playerNameLabel);
+            gameBoard.appendChild(playerNameInput);
+            gameBoard.appendChild(submitScoreButton);
 
         }
     }, 1000); // Update the timer every second.
@@ -67,7 +75,7 @@ function generateCards() {
 }
 
 // making a onClick function so the cards appear after its clicked
-startButton.addEventListener("click", function() {
+startButton.addEventListener("click", function () {
     generateCards();
     startTimer();
 });

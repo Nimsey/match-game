@@ -24,6 +24,27 @@ function shuffleArray(array) { /// Fisher-Yates shuffle algorithm
         [array[i], array[j]] = [array[j], array[i]];
     }
 }
+
+// making a timer to make things challenging
+function startTimer() {
+    timer = setInterval(() => {
+        timeLeft--;
+        timeDisplay.textContent = `Time: ${timeLeft}s`;
+
+        if (timeLeft <= 0) {
+            clearInterval(timer);
+            timeDisplay.textContent = 'Time: 0s';
+            gameBoard.innerHTML = ' '; // clear the board
+            // create the game over text and place it after the timer div
+            let gameOverText = document.createElement("div");
+            gameOverText.classList.add("game-over");
+            gameOverText.textContent = "Game Over!";
+            timeDisplay.after(gameOverText);
+
+        }
+    }, 1000); // Update the timer every second.
+}
+
 function createCard(cardType) {
     // Create a card element (<div class="card">A</div>)
     const card = document.createElement('div');
@@ -48,8 +69,8 @@ function generateCards() {
 // making a onClick function so the cards appear after its clicked
 startButton.addEventListener("click", function() {
     generateCards();
+    startTimer();
 });
 
-// Call the generateCards to generate and display the cards
 
 

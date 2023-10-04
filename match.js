@@ -17,3 +17,21 @@ const timeDisplay = document.querySelector('#time-left');
 const playerNameInput = document.querySelector('#player-name');
 const startButton = document.querySelector('#start-button');
 const submitScoreButton = document.querySelector('#submit-score');
+
+function createCard(cardType) {
+    // Create a card element (<div class="card">A</div>)
+    const card = document.createElement('div');
+    card.classList.add('card');
+    card.textContent = cardType; // Set the card's content (A, B, C, etc.)
+    return card;
+}
+function generateCards() {
+    // Loop through the cards array and create card elements
+    for (const cardType of cards) {
+        const card = createCard(cardType);
+        gameBoard.appendChild(card); // Append the card to the game board container
+    }
+}
+
+// Call the generateCards to generate and display the cards
+generateCards();

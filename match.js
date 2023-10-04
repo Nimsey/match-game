@@ -18,7 +18,7 @@ const playerNameInput = document.querySelector('#player-name');
 const startButton = document.querySelector('#start-button');
 const submitScoreButton = document.querySelector('#submit-score');
 
-function shuffleArray(array) {
+function shuffleArray(array) { /// Fisher-Yates shuffle algorithm
     for (let i = array.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
         [array[i], array[j]] = [array[j], array[i]];
@@ -32,16 +32,24 @@ function createCard(cardType) {
     return card;
 }
 function generateCards() {
-    // Loop through the "cards" array and create card elements
+    // creating two decks of the same card (for future to maybe mix decks of different types)
     const shuffledCards = [...cards, ...cards];
+    // calling shuffle function on the new array of cards
     shuffleArray(shuffledCards);
+    // new cards being lopped through
     shuffledCards.forEach((cardType) => {
+        // A card now going to be thrown into the createCard function
         const card = createCard(cardType);
+        // now the A which is now a html element is being appended to board. POW!
         gameBoard.appendChild(card);
     });
 }
 
+// making a onClick function so the cards appear after its clicked
+startButton.addEventListener("click", function() {
+    generateCards();
+});
 
 // Call the generateCards to generate and display the cards
-generateCards();
+
 

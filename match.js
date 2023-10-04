@@ -18,6 +18,12 @@ const playerNameInput = document.querySelector('#player-name');
 const startButton = document.querySelector('#start-button');
 const submitScoreButton = document.querySelector('#submit-score');
 
+function shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+    }
+}
 function createCard(cardType) {
     // Create a card element (<div class="card">A</div>)
     const card = document.createElement('div');
@@ -26,12 +32,16 @@ function createCard(cardType) {
     return card;
 }
 function generateCards() {
-    // Loop through the cards array and create card elements
-    for (const cardType of cards) {
+    // Loop through the "cards" array and create card elements
+    const shuffledCards = [...cards, ...cards];
+    shuffleArray(shuffledCards);
+    shuffledCards.forEach((cardType) => {
         const card = createCard(cardType);
-        gameBoard.appendChild(card); // Append the card to the game board container
-    }
+        gameBoard.appendChild(card);
+    });
 }
+
 
 // Call the generateCards to generate and display the cards
 generateCards();
+

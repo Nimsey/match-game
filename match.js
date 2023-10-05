@@ -54,11 +54,16 @@ function startTimer() {
 }
 
 function createCard(cardType) {
+    //need to create card container to store front/back for animation
+    const cardContainer = document.createElement('div');
+    cardContainer.classList.add("card-container");
     // Create a card element (<div class="card">A</div>)
     const card = document.createElement('div');
     card.classList.add('card');
     card.textContent = cardType; // Set the card's content (A, B, C, etc.)
-    return card;
+    // attach carc to the container
+    cardContainer.append(card);
+    return cardContainer;
 }
 function generateCards() {
     // creating two decks of the same card (for future to maybe mix decks of different types)
@@ -68,16 +73,16 @@ function generateCards() {
     // new cards being lopped through
     shuffledCards.forEach((cardType) => {
         // A card now going to be thrown into the createCard function
-        const card = createCard(cardType);
+        let cardContainer = createCard(cardType);
         // now the A which is now a html element is being appended to board. POW!
-        gameBoard.appendChild(card);
+        gameBoard.appendChild(cardContainer);
     });
 }
 
 // making a onClick function so the cards appear after its clicked
 startButton.addEventListener("click", function () {
     generateCards();
-    startTimer();
+    //startTimer();
 });
 
 

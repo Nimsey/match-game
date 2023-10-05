@@ -9,6 +9,8 @@ let timer;                 // Timer variable to track the remaining time
 let timeLeft = 15;         // Initial time limit for the game
 let matchedPairs = 0;      // Counter for the number of matched card pairs
 const scoreboard = [];     // Array to store player scores
+    // creating two decks of the same card (for future to maybe mix decks of different types)
+    const shuffledCards = [...cards, ...cards];
 
 // Get references to HTML elements using querySelector.
 const gameBoard = document.querySelector('.game-board');
@@ -65,9 +67,10 @@ function createCard(cardType) {
     cardContainer.append(card);
     return cardContainer;
 }
+
+
 function generateCards() {
-    // creating two decks of the same card (for future to maybe mix decks of different types)
-    const shuffledCards = [...cards, ...cards];
+
     // calling shuffle function on the new array of cards
     shuffleArray(shuffledCards);
     // new cards being lopped through
@@ -93,7 +96,6 @@ function flipCard(cardContainer) {
         setTimeout(checkMatch, 500);
     }
 }
-
 function checkMatch() {
     // call the matched pair array
     const [card1, card2] = flippedCards;
@@ -105,7 +107,7 @@ function checkMatch() {
 
         matchedPairs++;
 
-    } else {
+    }else {
         score -= 1;
         scoreDisplay.textContent = `Score: ${score}`;
         setTimeout(() => {
@@ -118,19 +120,19 @@ function checkMatch() {
     }
 
     canFlip = true;
-}
-if (matchedPairs === shuffledCards.length / 2) {
-    gameBoard.textContent = "YOU WON";
-    const playerNameLabel = document.createElement('label');
-    playerNameLabel.textContent = 'Enter your name: ';
-    playerNameInput.style.display = 'inline';
-    submitScoreButton.style.display = 'inline';
-    gameBoard.appendChild(playerNameLabel);
-    gameBoard.appendChild(playerNameInput);
-    gameBoard.appendChild(submitScoreButton)
-}
 
-
+    if(matchedPairs === shuffledCards.length / 2) {
+        console.log("you win");
+        gameBoard.textContent = "YOU WON";
+        const playerNameLabel = document.createElement('label');
+        playerNameLabel.textContent = 'Enter your name: ';
+        playerNameInput.style.display = 'inline';
+        submitScoreButton.style.display = 'inline';
+        gameBoard.appendChild(playerNameLabel);
+        gameBoard.appendChild(playerNameInput);
+        gameBoard.appendChild(submitScoreButton)
+    }
+}
 // Add an event listener to each card container to handle the card flipping.
 gameBoard.addEventListener('click', (event) => {
     const clickedCard = event.target.closest('.card-container');

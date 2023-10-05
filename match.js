@@ -9,8 +9,8 @@ let timer;                 // Timer variable to track the remaining time
 let timeLeft = 15;         // Initial time limit for the game
 let matchedPairs = 0;      // Counter for the number of matched card pairs
 const scoreboard = [];     // Array to store player scores
-    // creating two decks of the same card (for future to maybe mix decks of different types)
-    const shuffledCards = [...cards, ...cards];
+// creating two decks of the same card (for future to maybe mix decks of different types)
+const shuffledCards = [...cards, ...cards];
 
 // Get references to HTML elements using querySelector.
 const gameBoard = document.querySelector('.game-board');

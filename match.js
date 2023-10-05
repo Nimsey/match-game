@@ -83,13 +83,56 @@ function flipCard(cardContainer) {
     // if canFlip is false OR has flipped class OR there are two cards now flipped
     // need to make logic for once there are 2 cards clicked we start to check match
     if (!canFlip || card.classList.contains('flipped') || flippedCards.length >= 2) return;
-    
-    card.classList.toggle('flipped');
-    
-    flippedCards.push(card);
-    
 
+    card.classList.toggle('flipped');
+
+    flippedCards.push(card);
+
+    if (flippedCards.length === 2) {
+        canFlip = false;
+        setTimeout(checkMatch, 500);
+    }
 }
+
+function checkMatch() {
+    // call the matched pair array
+    const [card1, card2] = flippedCards;
+
+    if (card1.textContent === card2.textContent) {
+        score += 10;
+        scoreDisplay.textContent = `Score: ${score}`;
+        flippedCards = [];
+
+        matchedPairs++;
+
+    } else {
+        score -= 1;
+        scoreDisplay.textContent = `Score: ${score}`;
+        setTimeout(() => {
+            card1.classList.add("face-down");
+            card2.classList.add("face-down");
+            card1.classList.remove("flipped");
+            card2.classList.remove("flipped");
+            flippedCards = [];
+        }, 300);
+
+        if (matchedPairs === shuffledCards.length / 2) {
+            gameBoard.textContent = "YOU WON";
+            const playerNameLabel = document.createElement('label');
+            playerNameLabel.textContent = 'Enter your name: ';
+            playerNameInput.style.display = 'inline';
+            submitScoreButton.style.display = 'inline';
+            gameBoard.appendChild(playerNameLabel);
+            gameBoard.appendChild(playerNameInput);
+            gameBoard.appendChild(submitScoreButton)
+        }
+    }
+
+    canFlip = true;
+}
+
+
+
 // Add an event listener to each card container to handle the card flipping.
 gameBoard.addEventListener('click', (event) => {
     const clickedCard = event.target.closest('.card-container');

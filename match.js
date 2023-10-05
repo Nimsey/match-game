@@ -115,22 +115,20 @@ function checkMatch() {
             card2.classList.remove("flipped");
             flippedCards = [];
         }, 300);
-
-        if (matchedPairs === shuffledCards.length / 2) {
-            gameBoard.textContent = "YOU WON";
-            const playerNameLabel = document.createElement('label');
-            playerNameLabel.textContent = 'Enter your name: ';
-            playerNameInput.style.display = 'inline';
-            submitScoreButton.style.display = 'inline';
-            gameBoard.appendChild(playerNameLabel);
-            gameBoard.appendChild(playerNameInput);
-            gameBoard.appendChild(submitScoreButton)
-        }
     }
 
     canFlip = true;
 }
-
+if (matchedPairs === shuffledCards.length / 2) {
+    gameBoard.textContent = "YOU WON";
+    const playerNameLabel = document.createElement('label');
+    playerNameLabel.textContent = 'Enter your name: ';
+    playerNameInput.style.display = 'inline';
+    submitScoreButton.style.display = 'inline';
+    gameBoard.appendChild(playerNameLabel);
+    gameBoard.appendChild(playerNameInput);
+    gameBoard.appendChild(submitScoreButton)
+}
 
 
 // Add an event listener to each card container to handle the card flipping.

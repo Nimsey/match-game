@@ -17,6 +17,7 @@ const timeDisplay = document.querySelector('#time-left');
 const playerNameInput = document.querySelector('#player-name');
 const startButton = document.querySelector('#start-button');
 const submitScoreButton = document.querySelector('#submit-score');
+//const cardContainer = document.querySelector('.card-container');
 
 function shuffleArray(array) { /// Fisher-Yates shuffle algorithm
     for (let i = array.length - 1; i > 0; i--) {
@@ -24,7 +25,6 @@ function shuffleArray(array) { /// Fisher-Yates shuffle algorithm
         [array[i], array[j]] = [array[j], array[i]];
     }
 }
-
 // making a timer to make things challenging
 function startTimer() {
     timer = setInterval(() => {
@@ -78,9 +78,32 @@ function generateCards() {
         gameBoard.appendChild(cardContainer);
     });
 }
+function flipCard(cardContainer) {
+    const card = cardContainer.querySelector('.card');
+    // if canFlip is false OR has flipped class OR there are two cards now flipped
+    // need to make logic for once there are 2 cards clicked we start to check match
+    if (!canFlip || card.classList.contains('flipped') || flippedCards.length >= 2) return;
+    
+    card.classList.toggle('flipped');
+    
+    flippedCards.push(card);
+    
+
+}
+// Add an event listener to each card container to handle the card flipping.
+gameBoard.addEventListener('click', (event) => {
+    const clickedCard = event.target.closest('.card-container');
+    if (clickedCard) {
+        flipCard(clickedCard);
+    }
+});
 
 // making a onClick function so the cards appear after its clicked
 startButton.addEventListener("click", function () {
+    score = 0;
+    flippedCards = [];
+    canFlip = true;
+    timeLeft = 15;
     generateCards();
     //startTimer();
 });

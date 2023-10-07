@@ -31,7 +31,6 @@ function shuffleArray(array) { /// Fisher-Yates shuffle algorithm
     }
 }
 
-
 function createCard(cardType) {
     //need to create card container to store front/back for animation
     const cardContainer = document.createElement('div');
@@ -124,13 +123,11 @@ function startTimer() {
     }, 1000); // Update the timer every second.
 }
 
-
-
-function restart () {
+function startGame () {
     score = 0;
     scoreDisplay.textContent = 'Score: 0';
     timeLeft = 15;
-    timeDisplay.textContent = 'Time: 15s';
+    //timeDisplay.textContent = 'Time: 15s';
     playerNameInput.style.display = 'none';
     submitScoreButton.style.display = 'none';
     startButton.disabled = true;
@@ -180,5 +177,5 @@ submitScoreButton.addEventListener('click', () => {
 
 // making a onClick function so the cards appear after its clicked
 startButton.addEventListener("click", function () {  
-    restart();   
+    startGame();   
 });

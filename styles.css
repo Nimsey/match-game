@@ -6,7 +6,8 @@
 body {
     font-family: Arial, sans-serif;
     text-align: center;
-    background: linear-gradient(45DEG, blue, green);
+    background-image: url("https://cdn.discordapp.com/attachments/1160026509638111263/1160257678896005140/nimseyhobbs_black_red_and_gold_geometric_pattern_on_white_backg_bf88130b-8a6c-4a3a-a40f-c59bd8eb2d87.png?ex=6534012b&is=65218c2b&hm=29235a31c2af5f00e5fe4a7bfdd50d05ca7fa027f93520660fb38190fffe1996&");
+    background-repeat:repeat;
     color: rgba(211,211,211,0.9);
     height: 100vh;
     margin: 25px auto;
@@ -15,14 +16,23 @@ body {
     align-items: center;
 
 }
-
+#wrapper {
+    background-color: rgba(170, 0, 0, 0.9);
+    min-width: 80%;
+    min-height: 100vh;
+    border: 3px solid goldenrod;
+    text-align:center;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center
+}
 .scoreboard {
     margin-bottom: 10px;
-    border: 3px solid goldenrod;
 }
 
 .game-board {
-    border: 3px solid goldenrod;
+    
     display: flex;
     justify-content: center;
     align-items: center;
@@ -30,24 +40,24 @@ body {
     flex-wrap: wrap;
     max-width: 700px;
 }
-.score-list {
-    border: 3px solid goldenrod;
+.score-list li {
+list-style-type: none;
 }
 .timer {
-    border: 3px solid goldenrod;
+    /*  */
 }
 
 .card-container {
     width: 100px;
     height: 150px;
     perspective: 1000px;
+    
 }
 
 .card {
     width: 100%;
     height: 100%;
-    background-color: lightblue;
-    color: darkslategrey;
+    font-family: 'Young Serif', serif;
     font-size: 24px;
     display: flex;
     justify-content: center;
@@ -55,24 +65,22 @@ body {
     cursor: pointer;
     transform-style: preserve-3d;
     transition: transform 0.5s ease;
+    border-radius: 10px;
+    
     
 }
 .back {
-    background-color: darkblue;
-    color: darkblue;
+    color: transparent;
     transform: rotateY(180deg);
+    background-image: url("https://cdn.discordapp.com/attachments/1160026509638111263/1160131536901914665/cardPNG.png?ex=65338bb0&is=652116b0&hm=7c9ce9caccedd2bfb4c6d1f4da5e132599861eceee91b03fa4363fcde2ee5c73&");
+    background-size: 100px 150px;
+    background-position: center;
+    background-repeat: no-repeat;
     
 }
-
-/* .card-container:hover > .card {
-    transform: rotateY(180deg);
-} */
-
 .card.flipped {
-    transform: rotateY(360deg);
+    transform: rotateY(360deg); 
 }
-
-
 
 .card .front,
 .card .back {
@@ -84,9 +92,12 @@ body {
 }
 
 .front {
-    background-color: lightblue;  
+    background-image: url("https://cdn.discordapp.com/attachments/1160026509638111263/1160254044959416360/cardFRONT2_PNG.png?ex=6533fdc8&is=652188c8&hm=b064d885fcefc543e7da8acd84f48c1096869281f24e197087891d3e2467e233&");
+    background-size: 100% 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    color: white;  
 }
-
 
 .game-over {
     text-align: center;

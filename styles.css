@@ -3,12 +3,15 @@
     padding: 0;
     box-sizing: border-box;
 }
+
 body {
     font-family: Arial, sans-serif;
     text-align: center;
-    background-image: url("https://cdn.discordapp.com/attachments/1160026509638111263/1160257678896005140/nimseyhobbs_black_red_and_gold_geometric_pattern_on_white_backg_bf88130b-8a6c-4a3a-a40f-c59bd8eb2d87.png?ex=6534012b&is=65218c2b&hm=29235a31c2af5f00e5fe4a7bfdd50d05ca7fa027f93520660fb38190fffe1996&");
-    background-repeat:repeat;
-    color: rgba(211,211,211,0.9);
+    /* background-image: url("https://cdn.discordapp.com/attachments/1160026509638111263/1160257678896005140/nimseyhobbs_black_red_and_gold_geometric_pattern_on_white_backg_bf88130b-8a6c-4a3a-a40f-c59bd8eb2d87.png?ex=6534012b&is=65218c2b&hm=29235a31c2af5f00e5fe4a7bfdd50d05ca7fa027f93520660fb38190fffe1996&");
+     */
+    background-image: url("https://media.discordapp.net/attachments/1156675538283409478/1160315290530369567/nimseyhobbs_red_and_black_and_gold_illustrated_damask_swirls_re_f8825-7f51-4e09-984d-3d7cf22102bc.png?ex=653436d2&is=6521c1d2&hm=9e8a483c1a042506d8782f75c8638e2999955aee9f32ce1df7299d5472dc0e67&=&width=1357&height=1357");
+    background-repeat: repeat;
+    color: rgba(236, 236, 236, 0.9);
     height: 100vh;
     margin: 25px auto;
     display: flex;
@@ -16,49 +19,67 @@ body {
     align-items: center;
 
 }
+
 #wrapper {
-    background-color: rgba(170, 0, 0, 0.9);
-    min-width: 80%;
-    min-height: 100vh;
+    background-color: rgba(130, 7, 7, 0.9);
     border: 3px solid goldenrod;
-    text-align:center;
+    text-align: center;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    align-items: center
+    align-items: center;
+    margin: 100px;
 }
+
 .scoreboard {
-    margin-bottom: 10px;
+    margin: 10px;
+    font-size: 2rem;
 }
 
 .game-board {
-    
+
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 10px;
     flex-wrap: wrap;
-    max-width: 700px;
 }
+
 .score-list li {
-list-style-type: none;
+    list-style-type: none;
 }
-.timer {
-    /*  */
+
+#start-button {
+
+    margin-top: 25px;
+    font-size: 1.3rem;
+    padding: .75em 1em;
+    font-family: 'Young Serif', serif;
+}
+
+#player-name,
+#submit-score {
+    padding: .5em;
+    margin: .5em;
+    font-size: 1.1rem;
+}
+label {
+    margin-top: 10px;
 }
 
 .card-container {
-    width: 100px;
-    height: 150px;
+    margin: 12px;
+    width: 200px;
+    height: 300px;
     perspective: 1000px;
-    
+
 }
 
 .card {
     width: 100%;
     height: 100%;
     font-family: 'Young Serif', serif;
-    font-size: 24px;
+    font-size: 2rem;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -66,29 +87,31 @@ list-style-type: none;
     transform-style: preserve-3d;
     transition: transform 0.5s ease;
     border-radius: 10px;
-    
-    
+
+
 }
+
 .back {
     color: transparent;
     transform: rotateY(180deg);
     background-image: url("https://cdn.discordapp.com/attachments/1160026509638111263/1160131536901914665/cardPNG.png?ex=65338bb0&is=652116b0&hm=7c9ce9caccedd2bfb4c6d1f4da5e132599861eceee91b03fa4363fcde2ee5c73&");
-    background-size: 100px 150px;
+    background-size: 100% 100%;
     background-position: center;
     background-repeat: no-repeat;
-    
-}
-.card.flipped {
-    transform: rotateY(360deg); 
+
 }
 
-.card .front,
-.card .back {
+.card.flipped {
+    transform: rotateY(360deg);
+}
+
+.front,
+.back {
     width: 100%;
     height: 100%;
     position: absolute;
-    font-size: 24px;
-    
+    font-size: 2rem;
+
 }
 
 .front {
@@ -96,9 +119,25 @@ list-style-type: none;
     background-size: 100% 100%;
     background-position: center;
     background-repeat: no-repeat;
-    color: white;  
+    color: white;
+    text-shadow: 1px 1px 2px #020202;
+
 }
 
 .game-over {
     text-align: center;
+    font-weight: bold;
+    font-size: 4em;
+}
+.loseText, .winText {
+    text-align: center;
+    font-weight: bold;
+    font-size: 2em;
+    
+}
+.loseText {
+    color: white;
+}
+.winText {
+    color: goldenrod;
 }

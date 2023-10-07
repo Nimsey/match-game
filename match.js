@@ -12,7 +12,8 @@ const scoreboard = [];     // Array to store player scores
 // creating two decks of the same card (for future to maybe mix decks of different types)
 const shuffledCards = [...cards, ...cards];
 const clickSound = new Audio("https://cdn.discordapp.com/attachments/1156675538283409478/1160298468850532372/button-pressed-38129.mp3?ex=65342728&is=6521b228&hm=942862e3c99dda7b5080248719e79aa259d85d33e38ce6b5524645cde9322523&");
-
+clickSound.preload = "auto";
+clickSound.load();
 
 // Get references to HTML elements using querySelector.
 const gameBoard = document.querySelector('.game-board');
@@ -68,9 +69,17 @@ function flipCard(cardContainer) {
     card.classList.add("front");
     card.classList.toggle('flipped');
     flippedCards.push(card);
+
+    if (flippedCards.length === 1) {
+        // No cards are flipped, pause the audio (if it's playing) and reset it
+        clickSound.currentTime = 0;
+        
+    }
+
     if (flippedCards.length === 2) {
         canFlip = false;
-        setTimeout(checkMatch, 600);
+        clickSound.currentTime = 0;
+        setTimeout(checkMatch, 800);
     }
 }
 // Add an event listener to each card container to handle the card flipping.
@@ -98,7 +107,7 @@ function checkMatch() {
         score -= 1;
         scoreDisplay.textContent = `Score: ${score}`;
         setTimeout(() => {
-            clickSound.pause();
+            //clickSound.pause();
             card1.classList.add("back");
             card2.classList.add("back");
             card1.classList.remove("flipped");
@@ -106,7 +115,7 @@ function checkMatch() {
             card1.classList.remove("front");
             card2.classList.remove("front");
             flippedCards = [];
-        }, 600);
+        }, 800);
     }
     // let me flip the cards again once they are flipped back down
     canFlip = true;
@@ -160,7 +169,6 @@ function startGame() {
 // making a onClick function so the cards appear after its clicked
 function endGame() {
     canFlip = false;
-    //gameBoard.textContent = " ";
     // create the game over text and place it after the timer div
     gameOverText.style.display = "inline";
     // insert the form which the player can enter name

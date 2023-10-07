@@ -19,9 +19,21 @@ whether you win or lose you can keep track of your score each time by placing yo
 No install needed. Just open the link in the browser and play!
 
 ### My approach to the game
+Overall i chose this game because it had plenty of DOM manipulation to work with, and room to grow and personalize in the near future.
+
 - when building this out i chose flex layout to keep a fluid look as i resized the screen.
 - I took advantage of creating a lot of functions to simplify and keep code organized.
 - at the end i wanted to add sound, but that is WIP as i am still learning to work with timing.
+
+### Unsolved Problems
+- sound: it is buggy on when its triggered. working on seeing if timing will help the issue.
+
+### Stretch Goals
+- Dark and Light Mode
+- Different Deck colors/themes
+- peristant score board
+- upgrade list to object so i can use json or DB
+- sound for win/lose results
 
 
  ## My Code
@@ -108,6 +120,5 @@ The last snippet
     </div>
     <script src="match.js"></script>
 </body>
-
-
 ```
+

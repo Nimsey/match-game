@@ -19,7 +19,10 @@ const timeDisplay = document.querySelector('#time-left');
 const playerNameInput = document.querySelector('#player-name');
 const startButton = document.querySelector('#start-button');
 const submitScoreButton = document.querySelector('#submit-score');
+const gameOverText = document.querySelector(".game-over");
 //const cardContainer = document.querySelector('.card-container');
+
+gameOverText.style.display = "none";
 
 function shuffleArray(array) { /// Fisher-Yates shuffle algorithm
     for (let i = array.length - 1; i > 0; i--) {
@@ -27,33 +30,7 @@ function shuffleArray(array) { /// Fisher-Yates shuffle algorithm
         [array[i], array[j]] = [array[j], array[i]];
     }
 }
-// making a timer to make things challenging
-function startTimer() {
-    timer = setInterval(() => {
-        timeLeft--;
-        timeDisplay.textContent = `Time: ${timeLeft}s`;
 
-        if (timeLeft <= 0) {
-            clearInterval(timer);
-            timeDisplay.textContent = 'Time: 0s';
-            gameBoard.innerHTML = ' '; // clear the board
-            // create the game over text and place it after the timer div
-            let gameOverText = document.createElement("div");
-            gameOverText.classList.add("game-over");
-            gameOverText.textContent = "Game Over!";
-            timeDisplay.after(gameOverText);
-            // insert the form which the player can enter name
-            const playerNameLabel = document.createElement('label');
-            playerNameLabel.textContent = 'Enter your name: ';
-            playerNameInput.style.display = 'inline';
-            submitScoreButton.style.display = 'inline';
-            gameBoard.appendChild(playerNameLabel);
-            gameBoard.appendChild(playerNameInput);
-            gameBoard.appendChild(submitScoreButton);
-
-        }
-    }, 1000); // Update the timer every second.
-}
 
 function createCard(cardType) {
     //need to create card container to store front/back for animation
@@ -61,16 +38,14 @@ function createCard(cardType) {
     cardContainer.classList.add("card-container");
     // Create a card element (<div class="card">A</div>)
     const card = document.createElement('div');
-    card.classList.add('card');
+    card.classList.add("card", "back");
     card.textContent = cardType; // Set the card's content (A, B, C, etc.)
     // attach carc to the container
     cardContainer.append(card);
+    
     return cardContainer;
 }
-
-
 function generateCards() {
-
     // calling shuffle function on the new array of cards
     shuffleArray(shuffledCards);
     // new cards being lopped through
@@ -84,53 +59,45 @@ function generateCards() {
 function flipCard(cardContainer) {
     const card = cardContainer.querySelector('.card');
     // if canFlip is false OR has flipped class OR there are two cards now flipped
-    // need to make logic for once there are 2 cards clicked we start to check match
     if (!canFlip || card.classList.contains('flipped') || flippedCards.length >= 2) return;
-
+    card.classList.remove("back");
+    card.classList.add("front");
     card.classList.toggle('flipped');
-
     flippedCards.push(card);
-
     if (flippedCards.length === 2) {
         canFlip = false;
-        setTimeout(checkMatch, 500);
+        setTimeout(checkMatch, 600);
     }
 }
-function checkMatch() {
+function checkMatch() {  
     // call the matched pair array
     const [card1, card2] = flippedCards;
-
+    // if they match we get pts yay...
     if (card1.textContent === card2.textContent) {
         score += 10;
         scoreDisplay.textContent = `Score: ${score}`;
         flippedCards = [];
-
         matchedPairs++;
-
-    }else {
+    } else {
+        // if not minus one and reflip them back down
         score -= 1;
         scoreDisplay.textContent = `Score: ${score}`;
         setTimeout(() => {
-            card1.classList.add("face-down");
-            card2.classList.add("face-down");
+            card1.classList.add("back");
+            card2.classList.add("back");
             card1.classList.remove("flipped");
             card2.classList.remove("flipped");
+            card1.classList.remove("front");
+            card2.classList.remove("front");
             flippedCards = [];
-        }, 300);
+        }, 600);
     }
-
+    // let me flip the cards again once they are flipped back down
     canFlip = true;
-
-    if(matchedPairs === shuffledCards.length / 2) {
-        console.log("you win");
+    // win logic: just checking the match arr against the double deck arr
+    if (matchedPairs === shuffledCards.length / 2) {
         gameBoard.textContent = "YOU WON";
-        const playerNameLabel = document.createElement('label');
-        playerNameLabel.textContent = 'Enter your name: ';
-        playerNameInput.style.display = 'inline';
-        submitScoreButton.style.display = 'inline';
-        gameBoard.appendChild(playerNameLabel);
-        gameBoard.appendChild(playerNameInput);
-        gameBoard.appendChild(submitScoreButton)
+        endGame();
     }
 }
 // Add an event listener to each card container to handle the card flipping.
@@ -140,16 +107,78 @@ gameBoard.addEventListener('click', (event) => {
         flipCard(clickedCard);
     }
 });
+// making a timer to make things challenging
+function startTimer() {
+    timer = setInterval(() => {
+        timeLeft--;
+        timeDisplay.textContent = `Time: ${timeLeft}s`;
+        if (timeLeft <= 0) {
+            clearInterval(timer);
+            timeDisplay.textContent = 'Time: 0s';
+            
+            if (matchedPairs !== shuffledCards.length / 2) {
+                gameBoard.textContent = "YOU LOST"; // clear the board
+            }
+            endGame();
+        }
+    }, 1000); // Update the timer every second.
+}
 
-// making a onClick function so the cards appear after its clicked
-startButton.addEventListener("click", function () {
+
+
+function restart () {
     score = 0;
-    flippedCards = [];
-    canFlip = true;
+    scoreDisplay.textContent = 'Score: 0';
     timeLeft = 15;
+    timeDisplay.textContent = 'Time: 15s';
+    playerNameInput.style.display = 'none';
+    submitScoreButton.style.display = 'none';
+    startButton.disabled = true;
+    canFlip = true;
+    flippedCards = [];
+    matchedPairs = 0; // Reset matchedPairs
+    gameBoard.textContent=" ";
     generateCards();
-    //startTimer();
+    startTimer();
+}
+// making a onClick function so the cards appear after its clicked
+function endGame() {
+    canFlip = false;
+    // create the game over text and place it after the timer div
+    gameOverText.style.display = "inline";
+    // insert the form which the player can enter name
+    const playerNameLabel = document.createElement('label');
+    playerNameLabel.textContent = 'Enter your name: ';
+    playerNameInput.style.display = 'inline';
+    submitScoreButton.style.display = 'inline';
+    gameBoard.appendChild(playerNameLabel);
+    gameBoard.appendChild(playerNameInput);
+    gameBoard.appendChild(submitScoreButton);
+}
+
+
+submitScoreButton.addEventListener('click', () => {
+    const playerName = playerNameInput.value.trim();
+    if (playerName === '') {
+        alert('Please enter your name.');
+        return;
+    }
+
+    // Create a new list item to display player's name and score
+    const listItem = document.createElement('li');
+    listItem.textContent = `${playerName}: ${score}`;
+    
+    // Append the list item to the scoreboard
+    const scoreList = document.querySelector('#score-list');
+    scoreList.appendChild(listItem);
+
+    // Clear input and reset game
+    playerNameInput.value = '';
+    startButton.disabled = false;
+    gameBoard.innerHTML = '';
 });
 
-
-
+// making a onClick function so the cards appear after its clicked
+startButton.addEventListener("click", function () {  
+    restart();   
+});

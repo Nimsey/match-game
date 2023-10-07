@@ -53,10 +53,15 @@ body {
     justify-content: center;
     align-items: center;
     cursor: pointer;
-    perspective: 1000px;
     transform-style: preserve-3d;
     transition: transform 0.5s ease;
-    transform: rotateY(0deg);
+    
+}
+.back {
+    background-color: darkblue;
+    color: darkblue;
+    transform: rotateY(180deg);
+    
 }
 
 /* .card-container:hover > .card {
@@ -64,7 +69,7 @@ body {
 } */
 
 .card.flipped {
-    transform: rotateY(180deg);
+    transform: rotateY(360deg);
 }
 
 
@@ -75,18 +80,14 @@ body {
     height: 100%;
     position: absolute;
     font-size: 24px;
-    backface-visibility: hidden;
+    
 }
 
-.card .front {
-    background-color: lightblue;
-    transform: rotateY(0deg);
+.front {
+    background-color: lightblue;  
 }
 
-.card .back {
-    background-color: darkblue;
-    transform: rotateY(180deg);
-}
+
 .game-over {
     text-align: center;
 }

@@ -164,7 +164,7 @@ function startGame() {
     matchedPairs = 0; // Reset matchedPairs
 
     generateCards();
-    //startTimer();
+    startTimer();
 }
 // making a onClick function so the cards appear after its clicked
 function endGame() {

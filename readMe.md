@@ -121,4 +121,3 @@ The last snippet
     <script src="match.js"></script>
 </body>
 ```
-

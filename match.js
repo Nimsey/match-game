@@ -70,16 +70,10 @@ function flipCard(cardContainer) {
     card.classList.toggle('flipped');
     flippedCards.push(card);
 
-    if (flippedCards.length === 1) {
-        // No cards are flipped, pause the audio (if it's playing) and reset it
-        clickSound.currentTime = 0;
-        
-    }
-
     if (flippedCards.length === 2) {
         canFlip = false;
         clickSound.currentTime = 0;
-        setTimeout(checkMatch, 800);
+        setTimeout(checkMatch, 500);
     }
 }
 // Add an event listener to each card container to handle the card flipping.
@@ -87,8 +81,11 @@ gameBoard.addEventListener('click', (event) => {
 
     const clickedCard = event.target.closest('.card-container');
     if (clickedCard) {
+
         clickSound.play();
         flipCard(clickedCard);
+        clickSound.currentTime = 0;
+        //clickSound.pause();
     }
 });
 
@@ -115,7 +112,7 @@ function checkMatch() {
             card1.classList.remove("front");
             card2.classList.remove("front");
             flippedCards = [];
-        }, 800);
+        }, 500);
     }
     // let me flip the cards again once they are flipped back down
     canFlip = true;

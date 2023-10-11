@@ -1,5 +1,5 @@
-![matching the cards](image-1.png)
-![win results](image.png)
+![match ups](./images/gameSS2.png)
+![win results](./images/gameSS1.png)
 
 # Welcome to my Match Game!
 The code i used to build this game out is simple HTML/CSS and javascript. 

@@ -31,9 +31,10 @@ Overall i chose this game because it had plenty of DOM manipulation to work with
 ### Stretch Goals
 - Dark and Light Mode
 - Different Deck colors/themes
-- peristant score board
-- upgrade list to object so i can use json or DB
+- peristant score board with localStorage (research needed)
 - sound for win/lose results
+- update repsonsive layout with grid
+- mobile friendly mode
 
 
  ## My Code
@@ -88,7 +89,7 @@ For my CSS here is a snippet that shows some of the animation required to make t
 }
 ```
 
-The last snippet 
+The last snippet is the base HTML i used for the project. 
 
 ```HTML
 <body>

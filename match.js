@@ -81,10 +81,9 @@ gameBoard.addEventListener('click', (event) => {
 
     const clickedCard = event.target.closest('.card-container');
     if (clickedCard) {
-
         clickSound.play();
         flipCard(clickedCard);
-        clickSound.currentTime = 0;
+        //clickSound.currentTime = 0;
         //clickSound.pause();
     }
 });
@@ -181,7 +180,6 @@ function endGame() {
     gameBoard.prepend(playerNameLabel);
 
 }
-
 
 submitScoreButton.addEventListener('click', () => {
     const playerName = playerNameInput.value.trim();

@@ -16,7 +16,11 @@ Match the letters in the given time and win!
 whether you win or lose you can keep track of your score each time by placing your name in the input field and hitting submit. 
 
 ### Installation?
-No install needed. Just open the link in the browser and play!
+- command line into folder you want the game in
+- by using the command line clone the game: git clone https://github.com/Nimsey/match-game.git
+- cd into game-match
+- open index.html
+- play!
 
 ### My approach to the game
 Overall i chose this game because it had plenty of DOM manipulation to work with, and room to grow and personalize in the near future.
